@@ -1,0 +1,19 @@
+body{
+
+background-color: #fff9f5;
+}
+
+.container-fluid{
+background-color: #fff9f5;
+}
+
+#home1{
+    max-width: 50%;
+    height: auto;
+}
+
+
+.row{
+padding-top: 2%;
+padding-bottom: 2%;
+}
