@@ -8,16 +8,21 @@ background-color: #ae1d1d !important;
 
 .nav-link{
 color: #fff9f5 !important;
+margin-right: 20px;
 }
 
-.navbar-brand{
+#title{
 color: #fff9f5 !important;
+margin-left: 10px;
+margin-bottom: 1px;
+text-align: left;
 }
 
 
-#home1{
+#home{
     max-width: 50%;
     height: auto;
+    margin-left: 10px;
 }
 
 #logo{
