@@ -1,17 +1,40 @@
 body{
-
 background-color: #fff9f5;
 }
 
-.container-fluid{
-background-color: #fff9f5;
+.navbar{
+background-color: #ae1d1d !important;
 }
+
+.nav-link{
+color: #fff9f5 !important;
+}
+
+.navbar-brand{
+color: #fff9f5 !important;
+}
+
 
 #home1{
     max-width: 50%;
     height: auto;
 }
 
+#logo{
+    max-width: 10%;
+    height: auto;
+}
+
+#sp{
+    max-width: 10%;
+    height: auto;
+    margin: 5px;
+}
+
+.footer{
+color: #fff9f5;
+background-color: #ae1d1d;
+}
 
 .row{
 padding-top: 2%;
