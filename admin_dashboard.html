@@ -12,7 +12,7 @@
     <body>
         
         <header>   
-            <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark">
+            <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary navbar-dark">
                 <div class="navbar container-fluid">
                     <a href="index.html" class="button" id="home_button">
                         <svg id="home" xmlns="http://www.w3.org/2000/svg" width="30" height="25" fill="#fff9f5" class="bi bi-house" viewBox="0 0 16 16" href="index.html">
@@ -40,7 +40,7 @@
                 <nav class="nav flex-column">
                     <a class="nav-link dashboard-link" href="admin_dashboard.html">
                         <i class="bi bi-house"></i>
-                        <b>Dashboard</b>
+                        <span class="description"><b>Dashboard</b></span>
                     </a>
                     <a class="nav-link dashboard-link" href="#" data-bs-toggle="collapse" data-bs-target="#submenuAdoptii" aria-expanded="false" aria-controls="submenuAdoptii">
                         <i class="bi bi-bag-heart"></i>
@@ -112,12 +112,12 @@
             </div>
         </header>
 
-        <main>
-            
+        <main class="main-dashboard">
+            <span id="descriere"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </span>
         </main>
         
         <footer>
-            <div class="footer container-fluid text-center">
+            <div class="footer sticky-bottom container-fluid text-center">
                 <div class="row">
                     <div class="col-sm">
                         <img src="Images/logo.png" alt="logo" id="logo"> <br> Adapostul de animale Baia Mare

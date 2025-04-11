@@ -5,6 +5,7 @@ html{
 
 body{
     height: 100%;
+    margin-top: 72px;
     background-color: #fff9f5;
     margin-bottom: 200px;
 }
@@ -25,17 +26,34 @@ body{
 .footer{
     color: #fff9f5;
     background-color: #ae1d1d;
-    position: absolute;
-    bottom: 0;
     margin-top: 5px;
     width: 100%;
     height: 20%;
     max-height: 140px;
+    position: absolute;
+    bottom: 0;
 }
 
 
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
+    .navbar{
+        position: fixed-top;
+    }
+
+    .sidebar{
+        width: 60px;
+    }
+    
+    .sidebar .description{
+    display: none;
+    }
+
+    .main-dashboard{
+        background-color: #4475a6;
+        text-align: left;
+    }
+
     .footer{
     max-height: 240px;
     height: 30%;
@@ -263,4 +281,10 @@ color: #fff9f5 !important;
 
 .sidebar .nav-link:hover{
 background-color: #1a2128;
+}
+
+.main-dashboard{
+height: 100%;
+margin-left: 200px;
+padding-left: 20px;
 }
