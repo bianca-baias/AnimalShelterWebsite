@@ -101,6 +101,10 @@ margin-right: 20px;
     color: #ae1d1d;
 }
 
+#contButton{
+    display: none;
+}
+
 #favorite-button{
     border: none;
     outline: none;
@@ -229,4 +233,28 @@ text-align: center;
 
 #signUpForm{
     width: 70%;
+}
+
+
+
+.dashboard-link{
+color: #fff9f5 !important;
+}
+
+.submenu-item{
+    color: #fff9f5;
+}
+
+.submenu-item:hover{
+    color: #efaab0;
+}
+
+.sidebar{
+    position: fixed;
+    height: 100%;
+    background-color: #242d37;;
+}
+
+.sub-menu{
+padding-left: 30px;
 }
