@@ -252,9 +252,15 @@ color: #fff9f5 !important;
 .sidebar{
     position: fixed;
     height: 100%;
-    background-color: #242d37;;
+    background-color: #242d37;
+    align-items: center;
 }
 
 .sub-menu{
-padding-left: 30px;
+    padding-left: 30px;
+    background-color: #1a2128;
+}
+
+.sidebar .nav-link:hover{
+background-color: #1a2128;
 }
