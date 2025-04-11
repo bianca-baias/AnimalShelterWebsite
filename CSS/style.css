@@ -22,6 +22,40 @@ body{
     background-color: #ae1d1d !important;
 }
 
+.footer{
+    color: #fff9f5;
+    background-color: #ae1d1d;
+    position: absolute;
+    bottom: 0;
+    margin-top: 5px;
+    width: 100%;
+    height: 15%;
+    max-height: 140px;
+}
+
+
+
+@media (max-width: 768px) {
+    .footer{
+    max-height: 240px;
+    height: 30%;
+    }
+
+    body{
+    margin-bottom: 450px;
+    }
+
+    #slider-homepage img
+        { 
+            opacity: 35%;
+        }    
+
+    .carousel-item.slider-homepage{
+            padding-right: 0%;
+            }
+}
+
+
 .nav-link{
 color: #fff9f5 !important;
 margin-right: 20px;
@@ -57,16 +91,7 @@ margin-right: 20px;
     margin: 5px;
 }
 
-.footer{
-    color: #fff9f5;
-    background-color: #ae1d1d;
-    position: absolute;
-    bottom: 0;
-    margin-top: 5px;
-    width: 100%;
-    height: 15%;
-    max-height: 140px;
-}
+
 
 .row{
     padding-top: 15px;
@@ -167,27 +192,37 @@ padding-left: 20px;
 padding-right: 20px;
 }
 
-
-@media (max-width: 768px) {
-    .footer{
-    max-height: 240px;
-    }
-    body{
-    margin-bottom: 260px;
-}
-
-    #slider-homepage img
-        { 
-            opacity: 35%;
-        }    
-    .carousel-item.slider-homepage{
-            padding-right: 0%;
-            }
-}
-
 .pet-description{
 text-align: left;
 }
 .pet-description h5{
 text-align: center;
+}
+
+
+
+#logInButton{
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: #ae1d1d;
+    color: #fff9f5;
+    text-decoration: none;
+    padding-top: 2px;
+    padding-bottom: 3px;
+    margin-top: 5px;
+    width: 150px;
+}
+
+#forgotPasswordButton, #signUpButton{
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: #efaab0;
+    color: black;
+    text-decoration: none;
+    padding-top: 2px;
+    padding-bottom: 3px;
+    margin-top: 5px;
+    width: 150px;
 }
