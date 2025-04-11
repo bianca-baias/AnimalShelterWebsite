@@ -42,7 +42,7 @@ body{
     }
 
     body{
-    margin-bottom: 450px;
+    margin-bottom: 500px;
     }
 
     #slider-homepage img
@@ -201,7 +201,7 @@ text-align: center;
 
 
 
-#logInButton{
+#logInButton, #creeazaCont, #resetPasswordButton{
     border: none;
     outline: none;
     border-radius: 5px;
@@ -225,4 +225,8 @@ text-align: center;
     padding-bottom: 3px;
     margin-top: 5px;
     width: 150px;
+}
+
+#signUpForm{
+    width: 70%;
 }
