@@ -41,19 +41,6 @@ body{
         position: fixed-top;
     }
 
-    .sidebar{
-        width: 60px;
-    }
-    
-    .sidebar .description{
-    display: none;
-    }
-
-    .main-dashboard{
-        background-color: #4475a6;
-        text-align: left;
-    }
-
     .footer{
     max-height: 240px;
     height: 30%;
@@ -253,38 +240,3 @@ text-align: center;
     width: 70%;
 }
 
-
-
-.dashboard-link{
-color: #fff9f5 !important;
-}
-
-.submenu-item{
-    color: #fff9f5;
-}
-
-.submenu-item:hover{
-    color: #efaab0;
-}
-
-.sidebar{
-    position: fixed;
-    height: 100%;
-    background-color: #242d37;
-    align-items: center;
-}
-
-.sub-menu{
-    padding-left: 30px;
-    background-color: #1a2128;
-}
-
-.sidebar .nav-link:hover{
-background-color: #1a2128;
-}
-
-.main-dashboard{
-height: 100%;
-margin-left: 200px;
-padding-left: 20px;
-}
