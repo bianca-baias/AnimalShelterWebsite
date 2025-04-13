@@ -57,7 +57,7 @@ body{
 
     .carousel-item.slider-homepage{
             padding-right: 0%;
-            }
+    }
 }
 
 
@@ -276,5 +276,6 @@ width: 110px;
 }
 
 .actionPet{
-margin-bottom: 25px;
+padding-bottom: 40px;
+padding-right: 50px;
 }

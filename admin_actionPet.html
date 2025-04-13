@@ -84,16 +84,16 @@
                         <form>
                             <div class="row">
                                 <div class="col-sm-12 col-lg-6 actionPet">
-                                    <label>Nume</label>
+                                    <label><b>Nume</b></label>
                                     <input class="form-control" placeholder="nume">
                                 </div>
                                 <div class="col-sm-12 col-lg-6 actionPet">
-                                    <label>Varsta</label>
+                                    <label><b>Varsta</b></label>
                                     <input class="form-control" placeholder="varsta">
                                 </div>
 
-                                <div class="col-sm-12 col-lg-6 actionPet">
-                                    <label>Sex</label>
+                                <div class="col-sm-12 col-lg-2 actionPet">
+                                    <label><b>Sex</b></label>
                                     <div class="form-check">
                                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
                                             <label class="form-check-label" for="flexRadioDefault2">
@@ -107,8 +107,16 @@
                                             </label>
                                     </div>
                                 </div>
+                                <div class="col-sm-12 col-lg-4 actionPet">
+                                    <label for="form-select"><b>Status</b></label>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option value="1">Disponibil</option>
+                                        <option value="2">Indisponibil</option>
+                                        <option value="3">Rezervat</option>
+                                    </select>
+                                </div>
                                 <div class="col-sm-12 col-lg-6 actionPet">
-                                    <label for="form-select">Grad prietenie</label>
+                                    <label for="form-select"><b>Grad prietenie</b></label>
                                     <select class="form-select" aria-label="Default select example">
                                         <option selected>-</option>
                                         <option value="1">Agresiv</option>
@@ -117,16 +125,16 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-12 col-lg-6 actionPet">
-                                    <label for="uploadPozaProfil"></label>Poza profil: </label>
+                                    <label for="uploadPozaProfil"></label><b>Poze:</b></label>
                                     <input type="file" class="form-control-file" id="uploadPozaProfil" multiple> 
                                 </div>
                                 <div class="col-sm-12 col-lg-6 actionPet">
-                                    <label for="startDate">Data intrarii</label>
+                                    <label for="startDate"><b>Data intrarii</b></label>
                                     <input id="startDate" class="form-control" type="date" />
                                 </div>
                                 <div class="col-sm-12 col-lg-12 actionPet">
-                                    <label>Descriere</label>
-                                    <textarea class="form-control" rows="4" placeholder="type" required></textarea>
+                                    <label><b>Descriere</b></label>
+                                    <textarea class="form-control" rows="4" placeholder="descriere" required></textarea>
                                 </div>
                             </div>
                             <div class="row text-center">
