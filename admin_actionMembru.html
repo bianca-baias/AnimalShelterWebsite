@@ -78,69 +78,53 @@
         </header>
 
         <main>
-            <div class="container-fluid text-center admin-pet">   
+            <div class="container-fluid">
+                <div class="row"> <div class="col-sm-12 col-md-10 col-lg-12 text-center"> <h5 style="color: #ae1d1d;"><b>Membru</b></h5></div></div>
                 <div class="row justify-content-center">
-                    <div class="col-sm-5 col-md-5 col-lg-5" style="text-align: left; color:#ae1d1d;">                    
-                        <h5><strong>Membrii</strong></h5>
-                    </div>
-                    <div class="col-sm-5 col-md-5 col-lg-5" style="text-align: right;">                    
-                        <a href="admin_actionMembru.html" class="btn btn-primary"> Adauga membru <i class="bi bi-plus-circle"></i></a>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-sm-12 col-md-12 col-lg-10">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Nume</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Data crearii</th>
-                                    <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Bohoni Monika</td>
-                                        <td>monica_b@yahoo.com</td>
-                                        <td>01-01-2010</td>
-                                        <td>
-                                            <button class="btn btn-secondary">Sterge <i class="bi bi-trash3"></i></button>
-                                            <a href="admin_actionMembru.html" class="btn btn-secondary"> Editeaza <i class="bi bi-pencil-square"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Muresan Ioana</td>
-                                        <td>mioana@yahoo.com</td>
-                                        <td>24-12-2020</td>
-                                        <td>
-                                            <button class="btn btn-secondary">Sterge <i class="bi bi-trash3"></i></button>
-                                            <a href="admin_actionMembru.html" class="btn btn-secondary"> Editeaza <i class="bi bi-pencil-square"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Baias Bianca</td>
-                                        <td>biancabaias@yahoo.com</td>
-                                        <td>15-07-2023</td>
-                                        <td>
-                                            <button class="btn btn-secondary">Sterge <i class="bi bi-trash3"></i></button>
-                                            <a href="admin_actionMembru.html" class="btn btn-secondary"> Editeaza <i class="bi bi-pencil-square"></i></a>
-                                        </td>
-                                    </tr>
+                    <div class="col-sm-12 col-md-10 col-lg-4">
+                        <form>
+                            <div class="row">
+                                <div class="col-sm-12 col-lg-6 actionPet">
+                                    <label><b>Nume</b></label>
+                                    <input class="form-control" placeholder="nume">
+                                </div>
+                                <div class="col-sm-12 col-lg-6 actionPet">
+                                    <label><b>Prenume</b></label>
+                                    <input class="form-control" placeholder="prenume">
+                                </div>
+                                <div class="col-sm-12 col-lg-6 actionPet">
+                                    <label><b>Email</b></label>
+                                    <input class="form-control" placeholder="email">
+                                </div>
                                 
-                                </tbody>
-                            </table>
-                        </div>
+                                <div class="col-sm-12 col-lg-6 actionPet">
+                                    <label for="uploadPozaProfil"></label><b>Poze:</b></label>
+                                    <input type="file" class="form-control-file" id="uploadPozaProfil" multiple> 
+                                </div>
+                                <div class="col-sm-12 col-lg-6 actionPet">
+                                    <label for="startDate"><b>Data alaturarii</b></label>
+                                    <input id="startDate" class="form-control" type="date" />
+                                </div>
+                                <div class="col-sm-12 col-lg-12 actionPet">
+                                    <label><b>Descriere</b></label>
+                                    <textarea class="form-control" rows="4" placeholder="descriere" required></textarea>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-sm-12 col-lg-12">
+                                    <a class="btn btn-primary" href="admin_usersMembers.html" id="save">Salveaza</a>
+                                    <a class="btn btn-secondary" href="admin_usersMembers.html" id="cancel">Anuleaza</a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </div>        </main>
+            </div>
+            
+        </main>
         
         <footer>
-            <div class="footer sticky-bottom container-fluid text-center">
+            <div class="footer container-fluid text-center">
                 <div class="row">
                     <div class="col-sm">
                         <img src="Images/logo.png" alt="logo" id="logo"> <br> Adapostul de animale Baia Mare
