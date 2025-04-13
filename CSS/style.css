@@ -240,7 +240,7 @@ text-align: center;
     width: 70%;
 }
 
-
+/* admin dashboard*/
 .admin-card{
     background-color: #efaab0;
     height: 100%;
@@ -256,4 +256,25 @@ text-align: center;
 #dashboard-card{
     margin-bottom: 20px;
     min-height: 250px;
+}
+
+
+
+/* admin animale*/
+.admin-pet .btn-primary{
+background-color: #ae1d1d;
+border: none;
+}
+
+.admin-pet .btn-secondary{
+background-color: #efaab0;
+color: black;
+border: none;
+margin-top: 5px;
+height: 35px;
+width: 110px;
+}
+
+.actionPet{
+margin-bottom: 25px;
 }
