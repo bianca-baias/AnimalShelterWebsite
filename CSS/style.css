@@ -210,7 +210,7 @@ text-align: center;
 
 
 
-#logInButton, #creeazaCont, #resetPasswordButton{
+#logInButton, #creeazaCont, #resetPasswordButton, #save{
     border: none;
     outline: none;
     border-radius: 5px;
@@ -223,7 +223,7 @@ text-align: center;
     width: 150px;
 }
 
-#forgotPasswordButton, #signUpButton{
+#forgotPasswordButton, #signUpButton, #cancel{
     border: none;
     outline: none;
     border-radius: 5px;
