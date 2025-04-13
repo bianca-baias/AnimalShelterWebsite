@@ -240,3 +240,20 @@ text-align: center;
     width: 70%;
 }
 
+
+.admin-card{
+    background-color: #efaab0;
+    height: 100%;
+    align-items: center;
+    padding-top: 40px;
+    color: black;
+}
+
+.card-text-dashboard{
+    text-align: left;
+}
+
+#dashboard-card{
+    margin-bottom: 20px;
+    min-height: 250px;
+}
