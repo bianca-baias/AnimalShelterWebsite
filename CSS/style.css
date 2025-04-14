@@ -210,7 +210,7 @@ text-align: center;
 
 
 
-#logInButton, #creeazaCont, #resetPasswordButton, #save, #send{
+#logInButton, #creeazaCont, #resetPasswordButton, #save, #send, #filter-button, #sortButton{
     border: none;
     outline: none;
     border-radius: 5px;
@@ -288,4 +288,40 @@ width: 110px;
 .actionPet{
 padding-bottom: 40px;
 padding-right: 50px;
+}
+
+
+/* pet listing page*/
+#filterColumn{
+    background-color:#efaab0;
+}
+
+
+.card-head{
+background-color: rgb(37, 10, 10);
+text-align: center;
+}
+
+#pet-listing-image{
+    height: 100%;
+}
+
+#adopta-listing{
+    background-color: #ae1d1d;
+    width: 100%;
+    align-self: center;
+    border: none;
+    margin-bottom: 10px;
+}
+
+#favorite-listing{
+    background-color: #efaab0;
+    color: black;
+    width: 100%;
+    align-self: center;
+    border: none;
+}
+
+#pet-listing-card{
+    background-color: #efe2db;
 }
