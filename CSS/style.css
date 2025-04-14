@@ -320,8 +320,10 @@ text-align: center;
     width: 100%;
     align-self: center;
     border: none;
+    min-width: 38px;
 }
 
 #pet-listing-card{
     background-color: #efe2db;
+    max-width: 350px;
 }
