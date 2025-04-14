@@ -210,7 +210,7 @@ text-align: center;
 
 
 
-#logInButton, #creeazaCont, #resetPasswordButton, #save, #send, #filter-button, #sortButton{
+#logInButton, #creeazaCont, #resetPasswordButton, #save, #send, #filter-button, #sortButton, #donate{
     border: none;
     outline: none;
     border-radius: 5px;
@@ -327,3 +327,14 @@ text-align: center;
     background-color: #efe2db;
     max-width: 350px;
 }
+
+
+/* Doneaza online (imagini carusel 900*500)*/
+
+#form-doneaza{
+    background-color: #efaab0;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px ;
+}
+
