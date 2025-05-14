@@ -82,6 +82,22 @@
                         <a href="admin_actionAdoptiiFizice.html" class="btn btn-primary"> Adauga adoptie fizica <i class="bi bi-plus-circle"></i></a>
                     </div>
                 </div>
+                <div class="row" >
+                    <form class="form-inline">
+                        <div class="row" style="text-align:left;">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-1">
+                                <label>Cauta dupa id pet:</label>
+                            </div>
+                            <div class="col-lg-2">
+                                <input class="form-control" placeholder="id" name="id_pet" required>
+                            </div>
+                            <div class="col-lg-1">
+                                <button class="btn btn-primary" type="submit" id="save">Cauta</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <div class="row justify-content-center">
                     <div class="col-sm-12 col-md-12 col-lg-10">
                         <div class="table-responsive">

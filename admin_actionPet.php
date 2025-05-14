@@ -1,52 +1,196 @@
-<?php
-//var_dump($_SERVER["REQUEST_METHOD"]);
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="CSS/style.css">
+        <title>Adapostul de Animale Baia Mare</title>
+    </head>
 
+    <body>
+        
+        <header>   
+            <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary navbar-dark">
+                <div class="navbar container-fluid">
+                <a href="admin_dashboard.html" class="button" id="home_button">
+                        <svg id="home" xmlns="http://www.w3.org/2000/svg" width="30" height="25" fill="#fff9f5" class="bi bi-house" viewBox="0 0 16 16" href="index.html">
+                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+                        </svg>
+                        Administrare site
+                </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="admin_dashboard.html">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="admin_pets.php">Animale</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-current="page" href="#">Adoptii</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="admin_adoptiiFizice.php">Adoptii fizice</a></li>
+                                        <li><a class="dropdown-item" href="admin_adoptiiDistanta.html">Adoptii la distanta</a></li>
+                                    </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-current="page" href="#">Utilizatori</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="admin_usersCustomers.html">Clienti</a></li>
+                                        <li><a class="dropdown-item" href="admin_usersMembers.html">Membri</a></li>
+                                        <li><a class="dropdown-item" href="admin_usersSponsors.html">Sponsori</a></li>
+                                    </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-current="page" href="#">Donatii</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="admin_donatiiOnline.html">Online</a></li>
+                                        <li><a class="dropdown-item" href="admin_donatiiFormular.html">Formular 3.5%</a></li>
+                                    </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-current="page" href="#">Pagini</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="admin_editAboutUs.html">Despre noi</a></li>
+                                        <li><a class="dropdown-item" href="admin_editHelp.html">Implica-te</a></li>
+                                        <li><a class="dropdown-item" href="admin_editDoneaza.html">Doneaza</a></li>
+                                        <li><a class="dropdown-item" href="admin_editHappyEnding.html">Happy ending</a></li>
+                                        <li><a class="dropdown-item" href="admin_editContact.html">Contact</a></li>
+                                    </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="log_in.html">Log out</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
 
-$db=mysqli_connect("127.0.0.1","root","");
-mysqli_select_db($db,"animal_shelter");
+        <main>
 
-try{
+        <?php 
+            $db=mysqli_connect("127.0.0.1","root","");
+            mysqli_select_db($db,"animal_shelter");
 
+            if(isset($_GET['id'])){
+                $id=$_GET['id'];
+                $sql = "SELECT * FROM pet WHERE pet.id = '$id' LIMIT 1";
+                $result =  mysqli_query($db,$sql);
+                $row= mysqli_fetch_assoc($result);
+            }
+            else{
+                $row['nume']='';
+                $row['varsta']='';
+                $row['sex']='';
+                $row['status']='';
+                $row['temperament']='';
+                $row['descriere']='';
+                $row['poza']='';
+                $row['data_intrare']='';
+                $row['talie']='';
+                }
+        ?>
 
-    // Check if the page is accesed by a post method, and not just from url for example
-    if ($_SERVER["REQUEST_METHOD"] == "POST")
-    {
-        // htmlspecialchars - used for sanitizes the data from the user input, so the user cannot hack our website or db
-        $nume = htmlspecialchars($_POST["nume"]);
-        $varsta = htmlspecialchars($_POST["varsta"]);
-        $sex = htmlspecialchars($_POST["sex"]);
-        $status = htmlspecialchars($_POST["status"]);
-        $temperament = htmlspecialchars($_POST["temperament"]);
-        $poza = htmlspecialchars($_POST["poza"]);
-        $talie = htmlspecialchars($_POST["talie"]);
-        $intrare = htmlspecialchars($_POST["data_intrare"]);
-        $descriere = htmlspecialchars($_POST["descriere"]);
+            <div class="container-fluid">
+                <div class="row"> <div class="col-sm-12 col-md-10 col-lg-12 text-center"> <h5 style="color: #ae1d1d;"><b>Pet</b></h5></div></div>
+                <div class="row justify-content-center">
+                    <div class="col-sm-12 col-md-10 col-lg-4">
+                        <form method="post" action="admin_addPet.php">
+                            <div class="row">
+                                <div class="col-sm-12 col-lg-6 actionPet">
+                                    <label><b>Nume</b></label>
+                                    <input class="form-control" placeholder="nume" name="nume" value = "<?php  echo $row['nume']?>" required>
+                                </div>
+                                <div class="col-sm-12 col-lg-6 actionPet">
+                                    <label><b>Varsta</b></label>
+                                    <input class="form-control" placeholder="varsta" name="varsta"  value = "<?php  echo $row['varsta']?>" required>
+                                </div>
 
-        // Add the data to database
-        $sql="INSERT INTO pet(specie, nume, varsta, sex, talie, temperament, data_intrare, descriere, poza, status) values ('caine', '$nume', '$varsta', '$sex', '$talie', '$temperament', '$intrare', '$descriere', '$poza', '$status')";
-        //echo $sql;
-        //echo "</br>";
+                                <div class="col-sm-12 col-lg-4 actionPet">
+                                    <label for="form-select"><b>Sex</b></label>
+                                    <select class="form-select" aria-label="Default select example" name="sex" required>
+                                        <option value="M">Mascul</option>
+                                        <option value="F"<?php echo ($row['sex'] == 'F')? "selected":"" ;?>>Femela</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-lg-4 actionPet">
+                                    <label for="form-select"><b>Status</b></label>
+                                    <select class="form-select" aria-label="Default select example" name="status" required>
+                                        <option value="disponibil">Disponibil</option>
+                                        <option value="indisponibil" <?php echo ($row['status'] == 'indisponibil')? "selected":"" ;?> >Indisponibil</option>
+                                        <option value="rezervat" <?php echo ($row['status'] == 'rezervat')? "selected":"" ;?>>Rezervat</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-lg-4 actionPet">
+                                    <label for="form-select"><b>Temperament</b></label>
+                                    <select class="form-select" aria-label="Default select example" name="temperament" required>
+                                        <option  selected value="prietenos">Prietenos</option>
+                                        <option value="agresiv" <?php echo ($row['temperament'] == 'agresiv')? "selected":"" ;?>>Agresiv</option>
+                                        <option value="anxios " <?php echo ($row['temperament'] == 'anxios')? "selected":"" ;?>>Anxios</option>
 
-        $results= mysqli_query($db,$sql);
-        if (!$results)
-            die('Invalid querry:' .mysqli_error($db));
-
-        // if(empty($nume)){
-        //     //header("Location: admin_pets.html");
-
-        //     exit();
-        // }
-
-        header("Location: admin_pets.php");
-    }
-    else{
-        //Redirect to homepage if this page is trying to be accessed directly
-        header("Location: index.html");
-    }
-}
-
-catch(Exception $e){
-    echo 'Message: ' .$e->getMessage();
-}
-
-
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-lg-4 actionPet">
+                                    <label for="uploadPozaProfil"></label><b>Poze:</b></label>
+                                    <input type="file" class="form-control-file" id="uploadPozaProfil" name="poza"<?php echo ($row['poza'] == '')? "required":"" ;?>  multiple> 
+                                </div>
+                                <div class="col-sm-12 col-lg-4 actionPet">
+                                    <label for="startDate"><b>Talie</b></label>
+                                    <select class="form-select" aria-label="Default select example" name="talie" required>
+                                        <option value="mica" <?php echo ($row['talie'] == 'mica')? "selected":"" ;?>>Mica</option>
+                                        <option selected value="medie">Medie</option>
+                                        <option value="mare" <?php echo ($row['talie'] == 'mare')? "selected":"" ;?>>Mare</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-lg-4 actionPet">
+                                    <label for="startDate"><b>Data intrarii</b></label>
+                                    <input id="startDate" class="form-control" type="date" name="data_intrare" value="<?php echo $row['data_intrare'];?>" required/>
+                                </div>
+                                <div class="col-sm-12 col-lg-12 actionPet">
+                                    <label><b>Descriere</b></label>
+                                    <textarea class="form-control" rows="4" placeholder="descriere" required style="resize: none;" name="descriere"><?php echo $row['descriere'];?></textarea>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-sm-12 col-lg-12">
+                                    <button class="btn btn-primary" type="submit" id="save">Salveaza</button>
+                                    <a class="btn btn-secondary" href="admin_pets.php" id="cancel">Anuleaza</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+        
+        <footer>
+            <div class="footer container-fluid text-center">
+                <div class="row">
+                    <div class="col-sm">
+                        <img src="Images/logo.png" alt="logo" id="logo"> <br> Adapostul de animale Baia Mare
+                    </div>
+                    <div class="col-sm">
+                        <b>Sponsori:</b>
+                        <img src="Images/sp1.png" alt="sponsor1" id="sp">
+                        <img src="Images/sp2.png" alt="sponsori" id="sp">
+                        <img src="Images/sp3.png" alt="sponsori" id="sp">
+                    </div>
+                    <div class="col-sm">
+                        <b>Contact</b><br>
+                        <i>Telefon:</i> 0743114488 <br>
+                        <i>Email:</i> adapostuldecainibaiamare@yahoo.com <br>
+                        <i>Adresa:</i> Baia Mare, Strada Iazului, Nr. 2 
+                    </div>
+                </div>
+            </div>
+        </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </body>
+</html>

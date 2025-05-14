@@ -79,8 +79,27 @@
                         <h5><strong>Animale</strong></h5>
                     </div>
                     <div class="col-sm-12 col-md-5 col-lg-5" style="text-align: right;">                    
-                        <a href="admin_actionPet.html" class="btn btn-primary"> Adauga animal nou <i class="bi bi-plus-circle"></i></a>
+                        <a href="admin_actionPet.php" class="btn btn-primary"> Adauga animal nou <i class="bi bi-plus-circle"></i></a>
                     </div>
+                </div>
+                <div class="row" >
+                    <form class="form-inline" method="get" action="">
+                        <div class="row" style="text-align:left;">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-1">
+                                <label>Cauta dupa nume:</label>
+                            </div>
+                            <div class="col-lg-2">
+                                <input class="form-control" placeholder="nume" name="search">
+                            </div>
+                            <div class="col-lg-1">
+                                <button class="btn btn-primary" type="submit" id="save">Cauta</button>
+                            </div>
+                            <div class="col-lg-1">
+                                <a href="admin_pets.php" class="btn btn-primary" id="cancel" hidden>Inapoi</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-sm-12 col-md-12 col-lg-10">
@@ -103,45 +122,65 @@
                                     <?php 
                                         $db=mysqli_connect("127.0.0.1","root","");
                                         mysqli_select_db($db,"animal_shelter");
-                                        $nume = $sex = $temper = $status = "";
                                         $start = 0;
                                         $limit = 10;
                                         $id = 1;
+
                                         if(isset($_GET['id']))
                                         {
                                         $id=$_GET['id'];
                                         $start=($id-1)*$limit;
                                         }
 
-                                    $sqlv="SELECT * FROM pet LIMIT $start, $limit"; 
-                                    $resultv= mysqli_query($db,$sqlv);
+                                    // if we searched for a pet
+                                    if(isset($_GET['search']))
+                                    {
+                                        $values = $_GET['search'];
+                                        
+                                        $sqlv = "SELECT * FROM pet WHERE  pet.nume LIKE ('%$values%')";
+                                        $resultv= mysqli_query($db,"SELECT * FROM pet WHERE  pet.nume LIKE ('%$values%') LIMIT $start, $limit");
+                                        $rows= mysqli_num_rows(mysqli_query($db,$sqlv));
+                                        // if there is no pet found, show message
+                                        if($rows == 0)
+                                        {
+                                            echo "<tr><td colspan='8'>";
+                                            echo 'Nici un rezultat';
+                                            echo '</td></tr>';
+                                        }                                   
+                                    }
+                                    else
+                                    {
+                                        // if we just browse the page
+                                        $sqlv = "SELECT * FROM pet";
+                                        $resultv= mysqli_query($db,"SELECT * FROM pet LIMIT $start, $limit");
+                                    }
+
                                     if (!$resultv)
-                                    die('Invalid querry:' .mysqli_error($db));
+                                        die('Invalid querry:' .mysqli_error($db));
                                     else 
                                     {
                                     
                                         while ($myrow=mysqli_fetch_array($resultv,MYSQLI_ASSOC))
-                                            {echo "<tr><td>";
-                                            echo $myrow["id"];
-                                            echo "</td><td>";
-                                            echo $myrow["nume"];
-                                            echo "</td><td>";
-                                            echo $myrow["varsta"];
-                                            echo "</td><td>";
-                                            echo $myrow["sex"];
-                                            echo "</td><td>";
-                                            echo $myrow["temperament"];
-                                            echo "</td><td>";
-                                            echo $myrow["data_intrare"];
-                                            echo "</td><td>";
-                                            echo $myrow["status"];
-                                            echo '</td><td> 
-                                                <button class="btn btn-secondary">Sterge <i class="bi bi-trash3"></i></button>
-                                                <a href="admin_actionPet.html" class="btn btn-secondary"> Editeaza <i class="bi bi-pencil-square"></i></a>
-                                            </td></tr>'; 
+                                            {
+                                            ?>
+                                            <tr>
+                                                <td> <?php echo $myrow['id']?>  </td>
+                                                <td> <?php echo $myrow['nume']?>  </td>
+                                                <td> <?php echo $myrow['varsta']?>  </td>
+                                                <td> <?php echo $myrow['sex']?>  </td>
+                                                <td> <?php echo $myrow['temperament']?>  </td>
+                                                <td> <?php echo $myrow['data_intrare']?>  </td>
+                                                <td> <?php echo $myrow['status']?>  </td>
+                                                <td> 
+                                                    <a href="admin_actionPet.php?id=<?php echo $myrow['id'];?>" class="btn btn-secondary"> Editeaza <i class="bi bi-pencil-square"></i></a> 
+                                                    <a href="admin_deletePet.php?id=<?php echo $myrow['id'];?> "class="btn btn-secondary"> Sterge <i class="bi bi-pencil-square"></i></a>  
+                                                </td>
+                                            </tr>
+                                        <?php
                                         }
                                         echo " </tbody></table>";
-                                        $rows= mysqli_num_rows(mysqli_query($db,"SELECT * FROM pet "));
+                                        
+                                        $rows= mysqli_num_rows(mysqli_query($db,$sqlv));
                                         $total=ceil($rows/$limit);
 
                                         // if($id>1)
@@ -158,58 +197,18 @@
                                             { echo "<li style='display:inline; padding-right:5px;'><a href='?id=".$i."'>".$i."</a></li>"; }
                                         }
                                         echo "</ul>";
-                                        
+
+                                        if(isset($_GET['search'])){
+                                            //display an "inapoi" button at the end of a search page
+                                            echo ' <tr><td colspan="8"><a href="admin_pets.php" class="btn btn-primary" id="cancel"> Inapoi</a></td></tr>';
+                                        }
+
                                         // if($id!=$total)
                                         // {
                                         // echo "<a href='?id=".($id+1)."' class='button'> NEXT</a>";
                                         // }
-
                                     }
                                     ?>
-<!--
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Lola</td>
-                                        <td>5</td>
-                                        <td>F</td>
-                                        <td>prietenos</td>
-                                        <td>13-04-2025</td>
-                                        <td>Disponibil</td>
-                                        <td>
-                                            <button class="btn btn-secondary">Sterge <i class="bi bi-trash3"></i></button>
-                                            <a href="admin_actionPet.html" class="btn btn-secondary"> Editeaza <i class="bi bi-pencil-square"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>4</td>
-                                        <td>M</td>
-                                        <td>timid</td>
-                                        <td>28-04-2022</td>
-                                        <td>disponibil</td>
-                                        <td>
-                                            <button class="btn btn-secondary">Sterge <i class="bi bi-trash3"></i></button>
-                                            <a href="admin_actionPet.html" class="btn btn-secondary"> Editeaza <i class="bi bi-pencil-square"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Larry</td>
-                                        <td>9</td>
-                                        <td>M</td>
-                                        <td>agresiv</td>
-                                        <td>20-01-2025</td>
-                                        <td>adoptat</td>
-                                        <td>
-                                            <button class="btn btn-secondary">Sterge <i class="bi bi-trash3"></i></button>
-                                            <a href="admin_actionPet.html" class="btn btn-secondary"> Editeaza <i class="bi bi-pencil-square"></i></a>
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
--->
                         </div>
                     </div>
                 </div>
