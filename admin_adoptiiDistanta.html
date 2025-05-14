@@ -34,7 +34,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-current="page" href="#">Adoptii</a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="admin_adoptiiFizice.html">Adoptii fizice</a></li>
+                                        <li><a class="dropdown-item" href="admin_adoptiiFizice.php">Adoptii fizice</a></li>
                                         <li><a class="dropdown-item" href="admin_adoptiiDistanta.html">Adoptii la distanta</a></li>
                                     </ul>
                             </li>
