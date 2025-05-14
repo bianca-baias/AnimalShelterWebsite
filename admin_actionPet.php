@@ -85,6 +85,7 @@
                 $row= mysqli_fetch_assoc($result);
             }
             else{
+                $row['id']='';
                 $row['nume']='';
                 $row['varsta']='';
                 $row['sex']='';
@@ -155,6 +156,10 @@
                                 <div class="col-sm-12 col-lg-12 actionPet">
                                     <label><b>Descriere</b></label>
                                     <textarea class="form-control" rows="4" placeholder="descriere" required style="resize: none;" name="descriere"><?php echo $row['descriere'];?></textarea>
+                                </div>
+                                <div class="col-sm-12 col-lg-6 actionPet" hidden>
+                                    <label hidden><b>ID</b></label>
+                                    <input class="form-control" placeholder="nume" name="id" value = "<?php  echo $row['id']?>" hidden>
                                 </div>
                             </div>
                             <div class="row text-center">

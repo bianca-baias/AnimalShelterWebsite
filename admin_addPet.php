@@ -12,6 +12,7 @@ try{
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         // htmlspecialchars - used for sanitizes the data from the user input, so the user cannot hack our website or db
+        $id = htmlspecialchars($_POST["id"]);
         $nume = htmlspecialchars($_POST["nume"]);
         $varsta = htmlspecialchars($_POST["varsta"]);
         $sex = htmlspecialchars($_POST["sex"]);
@@ -22,11 +23,14 @@ try{
         $intrare = htmlspecialchars($_POST["data_intrare"]);
         $descriere = htmlspecialchars($_POST["descriere"]);
 
+        if($id != '')
+        {
+        $sql = "UPDATE pet set pet.nume='$nume', pet.varsta='$varsta', pet.sex='$sex', pet.status='$status', pet.temperament='$temperament', pet.poza='$poza', pet.talie='$talie', pet.descriere='$descriere', pet.data_intrare='$intrare' WHERE pet.id='$id' LIMIT 1";
+        }
+        else{
         // Add the data to database
         $sql="INSERT INTO pet(specie, nume, varsta, sex, talie, temperament, data_intrare, descriere, poza, status) values ('caine', '$nume', '$varsta', '$sex', '$talie', '$temperament', '$intrare', '$descriere', '$poza', '$status')";
-        //echo $sql;
-        //echo "</br>";
-
+        }
         $results= mysqli_query($db,$sql);
         if (!$results)
             die('Invalid querry:' .mysqli_error($db));
