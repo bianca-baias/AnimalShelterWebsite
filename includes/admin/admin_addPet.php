@@ -1,9 +1,7 @@
 <?php
 //var_dump($_SERVER["REQUEST_METHOD"]);
 
-
-$db=mysqli_connect("127.0.0.1","root","");
-mysqli_select_db($db,"animal_shelter");
+require "includes/dbh.php";
 
 try{
 
@@ -31,9 +29,9 @@ try{
         // Add the data to database
         $sql="INSERT INTO pet(specie, nume, varsta, sex, talie, temperament, data_intrare, descriere, poza, status) values ('caine', '$nume', '$varsta', '$sex', '$talie', '$temperament', '$intrare', '$descriere', '$poza', '$status')";
         }
-        $results= mysqli_query($db,$sql);
+        $results= mysqli_query($conn,$sql);
         if (!$results)
-            die('Invalid querry:' .mysqli_error($db));
+            die('Invalid querry:' .mysqli_error($conn));
 
         // if(empty($nume)){
         //     //header("Location: admin_pets.html");

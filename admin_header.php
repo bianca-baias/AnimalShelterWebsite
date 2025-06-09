@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php 
+    session_start(); 
+    require "includes/dbh.php";
+?>
 
 <!DOCTYPE html>
 <html lang="en">

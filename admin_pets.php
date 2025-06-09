@@ -1,4 +1,4 @@
-<?php  require "admin_header.php"?>
+<?php  require "admin_header.php"; require "includes/dbh.php";?>
 
         <main>
             <div class="container-fluid text-center admin-pet">   
@@ -48,8 +48,6 @@
                                 <tbody>
                                     
                                     <?php 
-                                        $db=mysqli_connect("127.0.0.1","root","");
-                                        mysqli_select_db($db,"animal_shelter");
                                         $start = 0;
                                         $limit = 10;
                                         $id = 1;
@@ -66,8 +64,8 @@
                                         $values = $_GET['search'];
                                         
                                         $sqlv = "SELECT * FROM pet WHERE  pet.nume LIKE ('%$values%')";
-                                        $resultv= mysqli_query($db,"SELECT * FROM pet WHERE  pet.nume LIKE ('%$values%') LIMIT $start, $limit");
-                                        $rows= mysqli_num_rows(mysqli_query($db,$sqlv));
+                                        $resultv= mysqli_query($conn,"SELECT * FROM pet WHERE  pet.nume LIKE ('%$values%') LIMIT $start, $limit");
+                                        $rows= mysqli_num_rows(mysqli_query($conn,$sqlv));
                                         // if there is no pet found, show message
                                         if($rows == 0)
                                         {
@@ -80,11 +78,11 @@
                                     {
                                         // if we just browse the page
                                         $sqlv = "SELECT * FROM pet";
-                                        $resultv= mysqli_query($db,"SELECT * FROM pet LIMIT $start, $limit");
+                                        $resultv= mysqli_query($conn,"SELECT * FROM pet LIMIT $start, $limit");
                                     }
 
                                     if (!$resultv)
-                                        die('Invalid querry:' .mysqli_error($db));
+                                        die('Invalid querry:' .mysqli_error($conn));
                                     else 
                                     {
                                     
@@ -108,7 +106,7 @@
                                         }
                                         echo " </tbody></table>";
                                         
-                                        $rows= mysqli_num_rows(mysqli_query($db,$sqlv));
+                                        $rows= mysqli_num_rows(mysqli_query($conn,$sqlv));
                                         $total=ceil($rows/$limit);
 
                                         // if($id>1)

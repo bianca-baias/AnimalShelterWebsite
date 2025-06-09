@@ -1,9 +1,7 @@
 <?php
 //var_dump($_SERVER["REQUEST_METHOD"]);
 
-
-$db=mysqli_connect("127.0.0.1","root","");
-mysqli_select_db($db,"animal_shelter");
+require "includes/dbh.php";
 
 try{
 
@@ -17,10 +15,10 @@ try{
         // Delete the data from database
         $sql="DELETE FROM pet WHERE pet.id = '$id'";
 
-        $results= mysqli_query($db,$sql);
+        $results= mysqli_query($conn,$sql);
 
         if (!$results){
-            die('Invalid querry:' .mysqli_error($db));
+            die('Invalid querry:' .mysqli_error($conn));
         }
 
         header("Location: ../../admin_pets.php");

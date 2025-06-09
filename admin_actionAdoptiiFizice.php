@@ -2,13 +2,11 @@
 
         <main>
         <?php 
-            $db=mysqli_connect("127.0.0.1","root","");
-            mysqli_select_db($db,"animal_shelter");
 
             if(isset($_GET['id'])){
                 $id=$_GET['id'];
                 $sql = "SELECT * FROM adoptii WHERE adoptii.id = $id LIMIT 1";
-                $result =  mysqli_query($db,$sql);
+                $result =  mysqli_query($conn,$sql);
                 $row= mysqli_fetch_assoc($result);
             }
             else{

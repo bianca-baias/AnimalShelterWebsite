@@ -1,4 +1,4 @@
-<?php  require "admin_header.php"?>
+<?php  require "admin_header.php";?>
 
         <main>
             <div class="container-fluid text-center admin-pet">   
@@ -7,7 +7,7 @@
                         <h5><strong>Adoptii fizice</strong></h5>
                     </div>
                     <div class="col-sm-12 col-md-5 col-lg-5" style="text-align: right;">                    
-                        <a href="admin_actionAdoptiiFizice.html" class="btn btn-primary"> Adauga adoptie fizica <i class="bi bi-plus-circle"></i></a>
+                        <a href="admin_actionAdoptiiFizice.php" class="btn btn-primary"> Adauga adoptie fizica <i class="bi bi-plus-circle"></i></a>
                     </div>
                 </div>
                 <div class="row" >
@@ -44,8 +44,6 @@
                                 </thead>
                                 <tbody>
                                     <?php 
-                                        $db=mysqli_connect("127.0.0.1","root","");
-                                        mysqli_select_db($db,"animal_shelter");
                                         $nume = $prenume = $id_user = $id_pet = $email = $data_adoptie = "";
                                         $start = 0;
                                         $limit = 10;
@@ -61,8 +59,8 @@
                                         $values = $_GET['search'];
                                         
                                         $sqlv = "SELECT * FROM adoptii WHERE  adoptii.id_pet = '$values'";
-                                        $resultv= mysqli_query($db,"SELECT * FROM adoptii WHERE  adoptii.id_pet = '$values' LIMIT $start, $limit");
-                                        $rows= mysqli_num_rows(mysqli_query($db,$sqlv));
+                                        $resultv= mysqli_query($conn,"SELECT * FROM adoptii WHERE  adoptii.id_pet = '$values' LIMIT $start, $limit");
+                                        $rows= mysqli_num_rows(mysqli_query($conn,$sqlv));
                                         // if there is no pet found, show message
                                         if($rows == 0)
                                         {
@@ -75,12 +73,12 @@
                                     {
                                         // if we just browse the page
                                         $sqlv = "SELECT * FROM adoptii";
-                                        $resultv= mysqli_query($db,"SELECT * FROM adoptii LIMIT $start, $limit");
+                                        $resultv= mysqli_query($conn,"SELECT * FROM adoptii LIMIT $start, $limit");
                                     }
                                     // $sqlv="SELECT * FROM adoptii LIMIT $start, $limit"; 
-                                    // $resultv= mysqli_query($db,$sqlv);
+                                    // $resultv= mysqli_query($conn,$sqlv);
                                     if (!$resultv)
-                                    die('Invalid querry:' .mysqli_error($db));
+                                    die('Invalid querry:' .mysqli_error($conn));
                                     else 
                                     {
                                     
@@ -102,7 +100,7 @@
                                         <?php
                                         }
                                         echo " </tbody></table>";
-                                        $rows= mysqli_num_rows(mysqli_query($db,"SELECT * FROM adoptii "));
+                                        $rows= mysqli_num_rows(mysqli_query($conn,"SELECT * FROM adoptii "));
                                         $total=ceil($rows/$limit);
 
                                         // if($id>1)
