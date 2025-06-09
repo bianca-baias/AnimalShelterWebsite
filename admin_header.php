@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -63,9 +65,19 @@
                                         <li><a class="dropdown-item" href="admin_editContact.html">Contact</a></li>
                                     </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="includes/logout.inc.php">Log out</a>
-                            </li>
+                            <?php  
+                                if(!isset($_SESSION['email'])){
+                                    echo '<li class="nav-item">
+                                            <a class="nav-link" href="log_in.php">Log In</a>
+                                        </li>';
+                                }
+                                else{
+                                    echo '<li class="nav-item">
+                                            <a class="nav-link" href="includes/logout.inc.php">Log out</a>
+                                        </li>';
+                                }
+
+                            ?>
                         </ul>
                     </div>
                 </div>
