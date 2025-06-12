@@ -13,7 +13,7 @@ try{
         $id=htmlspecialchars($_GET["id"]);
 
         // Delete the data from database
-        $sql="DELETE FROM pet WHERE pet.id = '$id'";
+        $sql="DELETE FROM users WHERE users.id = '$id'";
 
         $results= mysqli_query($conn,$sql);
 
@@ -21,7 +21,7 @@ try{
             die('Invalid querry:' .mysqli_error($conn));
         }
 
-        header("Location: ../../admin_pets.php");
+        header("Location: ../../admin_usersCustomers.php");
     }
     else{
         //Redirect to homepage if this page is trying to be accessed directly

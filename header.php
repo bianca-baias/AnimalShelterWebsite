@@ -72,7 +72,7 @@
                                             <a class="nav-link" href="log_in.php">Log In</a>
                                         </li>';
                                 }
-                                else{
+                                else {
                                     echo '<li class="nav-item">
                                             <a class="nav-link" href="includes/logout.inc.php">Log out</a>
                                         </li>';

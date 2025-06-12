@@ -1,6 +1,6 @@
 <?php
 //var_dump($_SERVER["REQUEST_METHOD"]);
-require "includes/dbh.php";
+require "../dbh.php";
 
 try{
 
