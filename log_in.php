@@ -20,7 +20,7 @@
                             <button class="btn btn-primary" type="submit" id="save" name ="login-submit"> Log in</button>
                         </div>
                         <div class="col-lg-12" style = "text-align: center;">
-                            <a class="btn btn-primary" href="forgot_password.html" id="forgotPasswordButton" >Am uitat parola</a>
+                            <a class="btn btn-primary" href="forgot_password.php" id="forgotPasswordButton" >Am uitat parola</a>
                         </div>
                     </div>
                     <div class="form-group row">
