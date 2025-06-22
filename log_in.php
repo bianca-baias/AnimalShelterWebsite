@@ -1,6 +1,4 @@
-<?php require "header.php" ?>
-
-
+<?php require "header_logged.php" ?>
 
         <main>
             <div class="container-fluid d-flex justify-content-center">

@@ -1,4 +1,4 @@
-<?php  require "header.php"?>
+<?php  require "header_logged.php"?>
 
         <main>
             Test <br>

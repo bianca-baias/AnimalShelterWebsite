@@ -14,5 +14,6 @@ if (!$conn)
 
 /* mysqli_select_db($db,"loginutil"); */
 mysqli_select_db($conn, $dbName);
-// session_start();
+//session_start();
+require_once "functions.php";
 

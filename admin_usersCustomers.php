@@ -1,4 +1,4 @@
-<?php  require "admin_header.php"; require "includes/dbh.php";?>
+<?php  require "header_logged.php"; require "includes/dbh.php";?>
 
         <main>
             <div class="container-fluid text-center admin-pet">   

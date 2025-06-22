@@ -36,14 +36,14 @@ if (isset($_POST["login-submit"])){
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['categorie'] = $row['categorie'];
-                if($_SESSION['categorie'] == 2){
-                    header("Location: ../index.php");
-                    exit();
-                }
-                else{
-                    header("Location: ../admin_dashboard.php");
-                    exit();
-                    }
+                
+                $test = $_SESSION['categorie'];
+                $sql = "SELECT redirect from categorie_utilizator WHERE categorie_utilizator.id = $test";
+                $results= mysqli_query($conn,$sql);
+                $myrow=mysqli_fetch_array($results,MYSQLI_ASSOC);
+                
+                header("Location: ../".$myrow['redirect']);
+                
             }
             else {
                 header("Location: ../index.php?error=incorectdata");

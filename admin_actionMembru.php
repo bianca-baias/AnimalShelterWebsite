@@ -1,4 +1,4 @@
-<?php  require "admin_header.php"?>
+<?php  require "header_logged.php"?>
 
         <main>
             <div class="container-fluid">
