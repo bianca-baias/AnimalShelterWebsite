@@ -16,20 +16,54 @@ try{
         $sex = htmlspecialchars($_POST["sex"]);
         $status = htmlspecialchars($_POST["status"]);
         $temperament = htmlspecialchars($_POST["temperament"]);
-        $poza = htmlspecialchars($_POST["poza"]);
         $talie = htmlspecialchars($_POST["talie"]);
         $intrare = htmlspecialchars($_POST["data_intrare"]);
         $descriere = htmlspecialchars($_POST["descriere"]);
-
+        
+        $file = $_FILES['file'];
+        $fileName = $file['name'];
+        $poza = $file['name'];
+        $fileTmpName = $file['tmp_name'];
+        $fileSize = $file['size'];
+        $fileError = $file['error'];
+        $fileType = $file['type'];
+        
+        $fileExt = explode('.', $fileName);
+        $fileActualExt = strtolower(end($fileExt));
+        
+        $allowed = array('jpg', 'jpeg', 'png');
+        
         if($id != '')
         {
         $sql = "UPDATE pet set pet.nume='$nume', pet.varsta='$varsta', pet.sex='$sex', pet.status='$status', pet.temperament='$temperament', pet.poza='$poza', pet.talie='$talie', pet.descriere='$descriere', pet.data_intrare='$intrare' WHERE pet.id='$id' LIMIT 1";
+        $results= mysqli_query($conn,$sql);        
         }
         else{
         // Add the data to database
         $sql="INSERT INTO pet(specie, nume, varsta, sex, talie, temperament, data_intrare, descriere, poza, status) values ('caine', '$nume', '$varsta', '$sex', '$talie', '$temperament', '$intrare', '$descriere', '$poza', '$status')";
+        $results= mysqli_query($conn,$sql);        
+        $id = mysqli_insert_id($conn);
+}
+
+        if(in_array($fileActualExt, $allowed))
+        {
+            if($fileError == 0){
+                $fileNameNew = "profile-".$id."-".$fileName;
+                //$poza = $fileNameNew;
+                $fileDestination = 'uploads/'.$fileNameNew;
+                move_uploaded_file($fileTmpName, $fileDestination);
+            }
+            else{
+                echo "There was an error uploading the file";
+                redirectioneaza("../../admin_pets.php?errorUpload");
+            }
         }
-        $results= mysqli_query($conn,$sql);
+        else{
+            echo "File type not allowed";
+            redirectioneaza("../../admin_pets.php?incorrectFileFormat");
+        }
+    
+
         if (!$results)
             die('Invalid querry:' .mysqli_error($conn));
 

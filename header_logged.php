@@ -32,7 +32,6 @@
     </head>
 
     <body>
-        <?php echo $page; ?>
         <header>
             <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary navbar-dark">
                 <div class="navbar container-fluid">

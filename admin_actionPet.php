@@ -28,7 +28,7 @@
                 <div class="row"> <div class="col-sm-12 col-md-10 col-lg-12 text-center"> <h5 style="color: #ae1d1d;"><b>Pet</b></h5></div></div>
                 <div class="row justify-content-center">
                     <div class="col-sm-12 col-md-10 col-lg-4">
-                        <form method="post" action="includes/admin/admin_addPet.php">
+                        <form method="post" action="includes/admin/admin_addPet.php" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-sm-12 col-lg-6 actionPet">
                                     <label><b>Nume</b></label>
@@ -63,10 +63,12 @@
 
                                     </select>
                                 </div>
+
                                 <div class="col-sm-12 col-lg-4 actionPet">
-                                    <label for="uploadPozaProfil"></label><b>Poze:</b></label>
-                                    <input type="file" class="form-control-file" id="uploadPozaProfil" name="poza"<?php echo ($row['poza'] == '')? "required":"" ;?>  multiple> 
+                                    <label for="uploadPozaProfil"></label><b>Poza:</b></label>
+                                    <input type="file" class="form-control-file" id="uploadPozaProfil" name="file" required> 
                                 </div>
+
                                 <div class="col-sm-12 col-lg-4 actionPet">
                                     <label for="startDate"><b>Talie</b></label>
                                     <select class="form-select" aria-label="Default select example" name="talie" required>

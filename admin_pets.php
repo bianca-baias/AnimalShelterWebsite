@@ -40,7 +40,7 @@
                                     <th scope="col">Varsta</th>
                                     <th scope="col">Sex</th>
                                     <th scope="col">Temperament</th>
-                                    <th scope="col">Intrare</th>
+                                    <th scope="col">Poza</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                     </tr>
@@ -90,12 +90,13 @@
                                             {
                                             ?>
                                             <tr>
+                                                
                                                 <td> <?php echo $myrow['id']?>  </td>
                                                 <td> <?php echo $myrow['nume']?>  </td>
                                                 <td> <?php echo $myrow['varsta']?>  </td>
                                                 <td> <?php echo $myrow['sex']?>  </td>
                                                 <td> <?php echo $myrow['temperament']?>  </td>
-                                                <td> <?php echo $myrow['data_intrare']?>  </td>
+                                                <td> <?php $numePoza = $myrow['id']."-".$myrow['poza']; $mypath ="includes/admin/uploads/profile-"."$numePoza";  echo "<img src=$mypath class='poza-pet-admin' height='100px'>";?></td>
                                                 <td> <?php echo $myrow['status']?>  </td>
                                                 <td> 
                                                     <a href="admin_actionPet.php?id=<?php echo $myrow['id'];?>" class="btn btn-secondary"> Editeaza <i class="bi bi-pencil-square"></i></a> 
