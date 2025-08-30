@@ -91,299 +91,94 @@
                             </div>
                             
                         </div>
-                        
+
+
                         <div class="row g-3">
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card h-100" id="pet-listing-card">
-                                    <div class="card-head">
-                                        <img src="Images/pets/p6.jpeg" class="card-img-top" alt="pet" id="pet-listing-image">
-                                    </div>
+
+                            <?php 
+                                $start = 0;
+                                $limit = 6;
+                                $id = 1;
+                                
+                                if(isset($_GET['id']))
+                                {
+                                $id=$_GET['id'];
+                                $start=($id-1)*$limit;
+                                }
+                                
+                                
+                                // if we just browse the page
+                                $sqlv = "SELECT * FROM pet";
+                                $resultv= mysqli_query($conn,"SELECT * FROM pet LIMIT $start, $limit");
+                                
+                                if (!$resultv)
+                                    die('Invalid querry:' .mysqli_error($conn));
+                                else 
+                                {
+                                    while ($myrow=mysqli_fetch_array($resultv,MYSQLI_ASSOC))
+                                        {
+                                        ?>
+                                            <div class="col-6 col-md-4 col-lg-3">
+                                                <div class="card h-100" id="pet-listing-card">
+                                                    <div class="card-head">
+                                                        <?php $numePoza = $myrow['id']."-".$myrow['poza']; $imgPath ="includes/admin/uploads/profile-"."$numePoza"; ?>
+                                                        <img src="<?php echo $imgPath ?>" class="card-img-top" alt="pet" id="pet-listing-image">
+                                                    </div>
+                                                    
+                                                    <div class="card-body">
+                                                        <h5 class="card-title"  id="card-body-listing"><b><?php echo $myrow['nume']?></b></h5>
+                                                        <p class="card-text"  id="card-body-listing">
+                                                            Varsta: <?php echo $myrow['varsta']?> ani <br>
+                                                            Talie: <?php echo $myrow['talie']?>
+                                                            </p>
+                                                        <div class="row text-center">
+                                                            <div class="col-12 col-md-12 col-lg-9">
+                                                                <a href="pet.php?id=<?php echo $myrow['id'];?>" class="btn btn-primary" id="adopta-listing">Detalii</a>
+                                                            </div>
+                                                        
+                                                            <div class="col-12 col-md-12 col-lg-3">
+                                                                <a href="#" class="btn btn-primary" id="favorite-listing"> <i class="bi bi-heart-fill" style="color: #ae1d1d;"></i> </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                    <?php
+                                    }
                                     
-                                    <div class="card-body">
-                                        <h5 class="card-title"  id="card-body-listing"><b>Nero</b></h5>
-                                        <p class="card-text"  id="card-body-listing">
-                                            Varsta: 4 ani <br>
-                                            Talie: mica
-                                            </p>
-                                        <div class="row text-center">
-                                            <div class="col-12 col-md-12 col-lg-9">
-                                                <a href="pet.php" class="btn btn-primary" id="adopta-listing">Detalii</a>
-                                            </div>
-                                        
-                                            <div class="col-12 col-md-12 col-lg-3">
-                                                <a href="#" class="btn btn-primary" id="favorite-listing"> <i class="bi bi-heart-fill" style="color: #ae1d1d;"></i> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card h-100" id="pet-listing-card">
-                                    <div class="card-head">
-                                        <img src="Images/pets/p6.jpeg" class="card-img-top" alt="pet" id="pet-listing-image">
-                                    </div>                                    
-                                    <div class="card-body">
-                                        <h5 class="card-title"  id="card-body-listing"><b>Nero</b></h5>
-                                        <p class="card-text"  id="card-body-listing">
-                                            Varsta: 4 ani <br>
-                                            Talie: mica
-                                            </p>
-                                        <div class="row text-center">
-                                            <div class="col-12 col-md-12 col-lg-9">
-                                                <a href="pet.php" class="btn btn-primary" id="adopta-listing">Detalii</a>
-                                            </div>
-                                        
-                                            <div class="col-12 col-md-12 col-lg-3">
-                                                <a href="#" class="btn btn-primary" id="favorite-listing"> <i class="bi bi-heart-fill" style="color: #ae1d1d;"></i> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    $rows= mysqli_num_rows(mysqli_query($conn,$sqlv));
+                                    $total=ceil($rows/$limit);
 
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card h-100" id="pet-listing-card">
-                                    <div class="card-head">
-                                        <img src="Images/pets/p6.jpeg" class="card-img-top" alt="pet" id="pet-listing-image">
-                                    </div>                                    
-                                    <div class="card-body">
-                                        <h5 class="card-title"  id="card-body-listing"><b>Nero</b></h5>
-                                        <p class="card-text"  id="card-body-listing">
-                                            Varsta: 4 ani <br>
-                                            Talie: mica
-                                            </p>
-                                        <div class="row text-center">
-                                            <div class="col-12 col-md-12 col-lg-9">
-                                                <a href="pet.php" class="btn btn-primary" id="adopta-listing">Detalii</a>
-                                            </div>
-                                        
-                                            <div class="col-12 col-md-12 col-lg-3">
-                                                <a href="#" class="btn btn-primary" id="favorite-listing"> <i class="bi bi-heart-fill" style="color: #ae1d1d;"></i> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    // if($id>1)
+                                    // {
+                                    // echo "<a href='?id=".($id-1)."' class='button'>PREVIOUS </a>";
+                                    // }
 
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card h-100" id="pet-listing-card">
-                                    <div class="card-head">
-                                        <img src="Images/pets/p6.jpeg" class="card-img-top" alt="pet" id="pet-listing-image">
-                                    </div>                                    
-                                    <div class="card-body">
-                                        <h5 class="card-title"  id="card-body-listing"><b>Nero</b></h5>
-                                        <p class="card-text"  id="card-body-listing">
-                                            Varsta: 4 ani <br>
-                                            Talie: mica
-                                            </p>
-                                        <div class="row text-center">
-                                            <div class="col-12 col-md-12 col-lg-9">
-                                                <a href="pet.php" class="btn btn-primary" id="adopta-listing">Detalii</a>
-                                            </div>
-                                        
-                                            <div class="col-12 col-md-12 col-lg-3">
-                                                <a href="#" class="btn btn-primary" id="favorite-listing"> <i class="bi bi-heart-fill" style="color: #ae1d1d;"></i> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    echo "<ul class='page' style='list-style-type:none;'>";
+                                    for($i=1;$i<=$total;$i++)
+                                    {
+                                        if($i==$id) 
+                                        { echo "<li class='current' style='display:inline; padding-right:5px;'>".$i."</li>"; }
+                                        else 
+                                        { echo "<li style='display:inline; padding-right:5px;'><a href='?id=".$i."'>".$i."</a></li>"; }
+                                    }
+                                    echo "</ul>";
 
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card h-100" id="pet-listing-card">
-                                    <div class="card-head">
-                                        <img src="Images/pets/p6.jpeg" class="card-img-top" alt="pet" id="pet-listing-image">
-                                    </div>                                    
-                                    <div class="card-body">
-                                        <h5 class="card-title"  id="card-body-listing"><b>Nero</b></h5>
-                                        <p class="card-text"  id="card-body-listing">
-                                            Varsta: 4 ani <br>
-                                            Talie: mica
-                                            </p>
-                                        <div class="row text-center">
-                                            <div class="col-12 col-md-12 col-lg-9">
-                                                <a href="pet.php" class="btn btn-primary" id="adopta-listing">Detalii</a>
-                                            </div>
-                                        
-                                            <div class="col-12 col-md-12 col-lg-3">
-                                                <a href="#" class="btn btn-primary" id="favorite-listing"> <i class="bi bi-heart-fill" style="color: #ae1d1d;"></i> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    if(isset($_GET['search'])){
+                                        //display an "inapoi" button at the end of a search page
+                                        echo ' <tr><td colspan="8"><a href="admin_pets.php" class="btn btn-primary" id="cancel"> Inapoi</a></td></tr>';
+                                    }
 
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card h-100" id="pet-listing-card">
-                                    <div class="card-head">
-                                        <img src="Images/pets/p6.jpeg" class="card-img-top" alt="pet" id="pet-listing-image">
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title"  id="card-body-listing"><b>Nero</b></h5>
-                                        <p class="card-text"  id="card-body-listing">
-                                            Varsta: 4 ani <br>
-                                            Talie: mica
-                                            </p>
-                                        <div class="row text-center">
-                                            <div class="col-12 col-md-12 col-lg-9">
-                                                <a href="pet.php" class="btn btn-primary" id="adopta-listing">Detalii</a>
-                                            </div>
-                                        
-                                            <div class="col-12 col-md-12 col-lg-3">
-                                                <a href="#" class="btn btn-primary" id="favorite-listing"> <i class="bi bi-heart-fill" style="color: #ae1d1d;"></i> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card h-100" id="pet-listing-card">
-                                    <div class="card-head">
-                                        <img src="Images/pets/p6.jpeg" class="card-img-top" alt="pet" id="pet-listing-image">
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title"  id="card-body-listing"><b>Nero</b></h5>
-                                        <p class="card-text"  id="card-body-listing">
-                                            Varsta: 4 ani <br>
-                                            Talie: mica
-                                            </p>
-                                        <div class="row text-center">
-                                            <div class="col-12 col-md-12 col-lg-9">
-                                                <a href="pet.php" class="btn btn-primary" id="adopta-listing">Detalii</a>
-                                            </div>
-                                        
-                                            <div class="col-12 col-md-12 col-lg-3">
-                                                <a href="#" class="btn btn-primary" id="favorite-listing"> <i class="bi bi-heart-fill" style="color: #ae1d1d;"></i> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card h-100" id="pet-listing-card">
-                                    <div class="card-head">
-                                        <img src="Images/pets/p6.jpeg" class="card-img-top" alt="pet" id="pet-listing-image">
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title"  id="card-body-listing"><b>Nero</b></h5>
-                                        <p class="card-text"  id="card-body-listing">
-                                            Varsta: 4 ani <br>
-                                            Talie: mica
-                                            </p>
-                                        <div class="row text-center">
-                                            <div class="col-12 col-md-12 col-lg-9">
-                                                <a href="pet.php" class="btn btn-primary" id="adopta-listing">Detalii</a>
-                                            </div>
-                                        
-                                            <div class="col-12 col-md-12 col-lg-3">
-                                                <a href="#" class="btn btn-primary" id="favorite-listing"> <i class="bi bi-heart-fill" style="color: #ae1d1d;"></i> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card h-100" id="pet-listing-card">
-                                    <div class="card-head">
-                                        <img src="Images/pets/p6.jpeg" class="card-img-top" alt="pet" id="pet-listing-image">
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title"  id="card-body-listing"><b>Nero</b></h5>
-                                        <p class="card-text"  id="card-body-listing">
-                                            Varsta: 4 ani <br>
-                                            Talie: mica
-                                            </p>
-                                        <div class="row text-center">
-                                            <div class="col-12 col-md-12 col-lg-9">
-                                                <a href="pet.php" class="btn btn-primary" id="adopta-listing">Detalii</a>
-                                            </div>
-                                        
-                                            <div class="col-12 col-md-12 col-lg-3">
-                                                <a href="#" class="btn btn-primary" id="favorite-listing"> <i class="bi bi-heart-fill" style="color: #ae1d1d;"></i> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card h-100" id="pet-listing-card">
-                                    <div class="card-head">
-                                        <img src="Images/pets/p6.jpeg" class="card-img-top" alt="pet" id="pet-listing-image">
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title"  id="card-body-listing"><b>Nero</b></h5>
-                                        <p class="card-text"  id="card-body-listing">
-                                            Varsta: 4 ani <br>
-                                            Talie: mica
-                                            </p>
-                                        <div class="row text-center">
-                                            <div class="col-12 col-md-12 col-lg-9">
-                                                <a href="pet.php" class="btn btn-primary" id="adopta-listing">Detalii</a>
-                                            </div>
-                                        
-                                            <div class="col-12 col-md-12 col-lg-3">
-                                                <a href="#" class="btn btn-primary" id="favorite-listing"> <i class="bi bi-heart-fill" style="color: #ae1d1d;"></i> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card h-100" id="pet-listing-card">
-                                    <div class="card-head">
-                                        <img src="Images/pets/p6.jpeg" class="card-img-top" alt="pet" id="pet-listing-image">
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title"  id="card-body-listing"><b>Nero</b></h5>
-                                        <p class="card-text"  id="card-body-listing">
-                                            Varsta: 4 ani <br>
-                                            Talie: mica
-                                            </p>
-                                        <div class="row text-center">
-                                            <div class="col-12 col-md-12 col-lg-9">
-                                                <a href="pet.php" class="btn btn-primary" id="adopta-listing">Detalii</a>
-                                            </div>
-                                        
-                                            <div class="col-12 col-md-12 col-lg-3">
-                                                <a href="#" class="btn btn-primary" id="favorite-listing"> <i class="bi bi-heart-fill" style="color: #ae1d1d;"></i> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card h-100" id="pet-listing-card">
-                                    <div class="card-head">
-                                        <img src="Images/pets/p6.jpeg" class="card-img-top" alt="pet" id="pet-listing-image">
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title"  id="card-body-listing"><b>Nero</b></h5>
-                                        <p class="card-text"  id="card-body-listing">
-                                            Varsta: 4 ani <br>
-                                            Talie: mica
-                                            </p>
-                                        <div class="row text-center">
-                                            <div class="col-12 col-md-12 col-lg-9">
-                                                <a href="pet.php" class="btn btn-primary" id="adopta-listing">Detalii</a>
-                                            </div>
-                                        
-                                            <div class="col-12 col-md-12 col-lg-3">
-                                                <a href="#" class="btn btn-primary" id="favorite-listing"> <i class="bi bi-heart-fill" style="color: #ae1d1d;"></i> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            
+                                    // if($id!=$total)
+                                    // {
+                                    // echo "<a href='?id=".($id+1)."' class='button'> NEXT</a>";
+                                    // }
+                                }
+                            ?>
                         </div>
+
+
                         <div class="row">
                             <div class="col-6" style="text-align: right;">
                                 <button>Pagina anterioara</button>
