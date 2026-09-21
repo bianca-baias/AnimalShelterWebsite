@@ -97,7 +97,7 @@
 
                             <?php 
                                 $start = 0;
-                                $limit = 6;
+                                $limit = 8;
                                 $id = 1;
                                 
                                 if(isset($_GET['id']))
