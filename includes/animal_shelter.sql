@@ -1,111 +1,88 @@
--- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost    Database: animal_shelter
--- ------------------------------------------------------
--- Server version	5.5.5-10.4.32-MariaDB
+-- Host: 127.0.0.1
+-- Generation Time: Sep 21, 2026 at 09:13 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `animal_shelter`
+--
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `adoptii`
 --
 
-DROP TABLE IF EXISTS `adoptii`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `adoptii` (
   `id` int(11) NOT NULL,
   `id_pet` int(11) NOT NULL,
+  `id_user` int(11) DEFAULT NULL,
   `nume` varchar(100) NOT NULL,
   `prenume` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `data_adoptie` date NOT NULL,
-  `id_user` int(11) DEFAULT NULL,
-  `tip_adoptie` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_pet` (`id_pet`),
-  KEY `id_user` (`id_user`),
-  CONSTRAINT `adoptii_ibfk_1` FOREIGN KEY (`id_pet`) REFERENCES `pet` (`id`),
-  CONSTRAINT `adoptii_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`)
+  `tip_adoptie` varchar(50) NOT NULL DEFAULT 'fizica'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `adoptii`
 --
 
-LOCK TABLES `adoptii` WRITE;
-/*!40000 ALTER TABLE `adoptii` DISABLE KEYS */;
-/*!40000 ALTER TABLE `adoptii` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `adoptii` (`id`, `id_pet`, `id_user`, `nume`, `prenume`, `email`, `data_adoptie`, `tip_adoptie`) VALUES
+(1, 34, 2, 'Ionescu', 'Maria', 'user@test.ro', '2024-05-20', 'fizica');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `adoptii_distanta`
 --
 
-DROP TABLE IF EXISTS `adoptii_distanta`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `adoptii_distanta` (
   `id` int(11) NOT NULL,
   `perioada` varchar(50) NOT NULL,
-  `id_adoptie` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_adoptie` (`id_adoptie`),
-  CONSTRAINT `adoptii_distanta_ibfk_1` FOREIGN KEY (`id_adoptie`) REFERENCES `adoptii` (`id`)
+  `id_adoptie` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `adoptii_distanta`
---
-
-LOCK TABLES `adoptii_distanta` WRITE;
-/*!40000 ALTER TABLE `adoptii_distanta` DISABLE KEYS */;
-/*!40000 ALTER TABLE `adoptii_distanta` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `categorie_utilizator`
 --
 
-DROP TABLE IF EXISTS `categorie_utilizator`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `categorie_utilizator` (
   `id` int(11) NOT NULL,
   `categorie` varchar(50) NOT NULL,
-  `redirect` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  `redirect` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `categorie_utilizator`
 --
 
-LOCK TABLES `categorie_utilizator` WRITE;
-/*!40000 ALTER TABLE `categorie_utilizator` DISABLE KEYS */;
-INSERT INTO `categorie_utilizator` VALUES (0,'vizitator','index.html'),(1,'user','index.html'),(2,'admin','admin_dashboard.html');
-/*!40000 ALTER TABLE `categorie_utilizator` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `categorie_utilizator` (`id`, `categorie`, `redirect`) VALUES
+(1, 'admin', 'admin_dashboard.php'),
+(2, 'utilizator', 'index.php');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `donatii_online`
 --
 
-DROP TABLE IF EXISTS `donatii_online`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `donatii_online` (
   `id` int(11) NOT NULL,
   `id_user` int(11) DEFAULT NULL,
@@ -113,143 +90,120 @@ CREATE TABLE `donatii_online` (
   `prenume` varchar(100) NOT NULL,
   `suma` decimal(10,2) NOT NULL,
   `data_donatie` date NOT NULL,
-  `recurenta` tinyint(1) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_user` (`id_user`),
-  CONSTRAINT `donatii_online_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`)
+  `recurenta` tinyint(1) NOT NULL DEFAULT 0,
+  `email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `donatii_online`
---
-
-LOCK TABLES `donatii_online` WRITE;
-/*!40000 ALTER TABLE `donatii_online` DISABLE KEYS */;
-/*!40000 ALTER TABLE `donatii_online` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `drepturi`
 --
 
-DROP TABLE IF EXISTS `drepturi`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `drepturi` (
   `id` int(11) NOT NULL,
   `id_pagina` int(11) NOT NULL,
-  `categorie_utilizator` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_pagina` (`id_pagina`),
-  KEY `categorie_utilizator` (`categorie_utilizator`),
-  CONSTRAINT `drepturi_ibfk_1` FOREIGN KEY (`id_pagina`) REFERENCES `pagini` (`id`),
-  CONSTRAINT `drepturi_ibfk_2` FOREIGN KEY (`categorie_utilizator`) REFERENCES `categorie_utilizator` (`id`)
+  `categorie_utilizator` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `drepturi`
---
-
-LOCK TABLES `drepturi` WRITE;
-/*!40000 ALTER TABLE `drepturi` DISABLE KEYS */;
-/*!40000 ALTER TABLE `drepturi` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `favorite`
 --
 
-DROP TABLE IF EXISTS `favorite`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `favorite` (
   `id` int(11) NOT NULL,
   `id_pet` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_pet` (`id_pet`),
-  KEY `id_user` (`id_user`),
-  CONSTRAINT `favorite_ibfk_1` FOREIGN KEY (`id_pet`) REFERENCES `pet` (`id`),
-  CONSTRAINT `favorite_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`)
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `favorite`
---
-
-LOCK TABLES `favorite` WRITE;
-/*!40000 ALTER TABLE `favorite` DISABLE KEYS */;
-/*!40000 ALTER TABLE `favorite` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `formular`
 --
 
-DROP TABLE IF EXISTS `formular`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `formular` (
   `id` int(11) NOT NULL,
   `nume` varchar(100) NOT NULL,
   `prenume` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `data_completare` date NOT NULL,
-  PRIMARY KEY (`id`)
+  `data_completare` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `formular`
---
-
-LOCK TABLES `formular` WRITE;
-/*!40000 ALTER TABLE `formular` DISABLE KEYS */;
-/*!40000 ALTER TABLE `formular` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `pagini`
 --
 
-DROP TABLE IF EXISTS `pagini`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pagini` (
   `id` int(11) NOT NULL,
   `nume_pagina` varchar(100) NOT NULL,
   `link` varchar(255) NOT NULL,
   `categorie_utilizator` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `categorie_utilizator` (`categorie_utilizator`),
-  CONSTRAINT `pagini_ibfk_1` FOREIGN KEY (`categorie_utilizator`) REFERENCES `categorie_utilizator` (`id`)
+  `vizibil` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `pagini`
 --
 
-LOCK TABLES `pagini` WRITE;
-/*!40000 ALTER TABLE `pagini` DISABLE KEYS */;
-INSERT INTO `pagini` VALUES (1,'Home','index.html',0),(2,'Home','index.html',1),(3,'Dashboard','admin_dashboard.html',2),(4,'Adopta','adopta.html',1),(5,'Adopta','adopta.html',0),(6,'Doneaza online','doneaza_online.html',0),(7,'Doneaza online','doneaza_online.html',1),(8,'Formularul 230','redirect.html',1),(9,'Formularul 230','redirect.html',0),(10,'Contacteaza adapostul','contact.html',0),(11,'Contacteaza adapostul','contact.html',1),(12,'Log in','log_in.php',0),(13,'Log in','log_in.php',1),(14,'Log in','log_in.php',2),(15,'Gestiune animale','admin_pets.php',2),(16,'Gestiune animale','admin_actionPet.php',2),(17,'Gestiune adoptii fizice','admin_actionAdoptiiFizice.html',2),(18,'Gestiune adoptii fizice','admin_adoptiiFizice.php',2),(19,'Gestiune utilizatori','admin_usersCustomers.html',2),(20,'Gestiune utilizatori','admin_actionUser.html',2),(21,'Gestiune donatii','admin_donatiiOnline.html',2),(22,'Gestiune donatii','admin_actionDonatiiOnline.html',2);
-/*!40000 ALTER TABLE `pagini` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `pagini` (`id`, `nume_pagina`, `link`, `categorie_utilizator`, `vizibil`) VALUES
+(1, 'Home', 'index.php', 2, 0),
+(2, 'Misiune', 'misiune.php', 2, 0),
+(3, 'Voluntari', 'voluntari.php', 2, 0),
+(4, 'Parteneri', 'parteneri.php', 2, 0),
+(5, 'Adopta', 'adopta.php', 2, 1),
+(6, 'Adopta la distanta', 'adopta_distanta.php', 2, 0),
+(7, 'Foster', 'foster.php', 2, 0),
+(8, 'Voluntariat', 'voluntariat.php', 2, 0),
+(9, 'Doneaza online', 'doneaza_online.php', 2, 1),
+(10, 'Doneaza fizic', 'doneaza_fizic.php', 2, 0),
+(11, 'Redirectioneaza 3.5%', 'redirect.php', 2, 1),
+(12, 'Happy end', 'happy_end.php', 2, 0),
+(13, 'Contact', 'contact.php', 2, 1),
+(14, 'Cont', 'cont.php', 2, 1),
+(15, 'Favorite', 'favorite.php', 2, 1),
+(16, 'Log in', 'log_in.php', 2, 1),
+(17, 'Log out', 'includes/logout.inc.php', 2, 1),
+(18, 'Detalii animal', 'pet.php', 2, 0),
+(19, 'Inregistrare', 'sign_up.php', 2, 0),
+(20, 'Recuperare parola', 'forgot_password.php', 2, 0),
+(21, 'Template', 'template.php', 2, 0),
+(22, 'Dashboard', 'admin_dashboard.php', 1, 0),
+(23, 'Gestiune animale', 'admin_pets.php', 1, 1),
+(24, 'Adoptii fizice', 'admin_adoptiiFizice.php', 1, 1),
+(25, 'Adoptii la distanta', 'admin_adoptiiDistanta.php', 1, 1),
+(26, 'Clienti', 'admin_usersCustomers.php', 1, 0),
+(27, 'Membri', 'admin_usersMembers.php', 1, 0),
+(28, 'Sponsori', 'admin_usersSponsors.php', 1, 0),
+(29, 'Donatii online', 'admin_donatiiOnline.php', 1, 1),
+(30, 'Formular 3.5%', 'admin_donatiiFormular.php', 1, 1),
+(31, 'Log out', 'includes/logout.inc.php', 1, 1),
+(32, 'Editare animal', 'admin_actionPet.php', 1, 0),
+(33, 'Editare adoptie fizica', 'admin_actionAdoptiiFizice.php', 1, 0),
+(34, 'Editare adoptie distanta', 'admin_actionAdoptiiDistanta.php', 1, 0),
+(35, 'Editare utilizator', 'admin_actionUser.php', 1, 0),
+(36, 'Editare membru', 'admin_actionMembru.php', 1, 0),
+(37, 'Editare sponsor', 'admin_actionSponsor.php', 1, 0),
+(38, 'Home', 'index.php', 1, 0),
+(39, 'Adopta', 'adopta.php', 1, 0),
+(40, 'Detalii animal', 'pet.php', 1, 0),
+(41, 'Contact', 'contact.php', 1, 0),
+(42, 'Cont', 'cont.php', 1, 0),
+(43, 'Template admin', 'template_admin.php', 1, 0);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `pet`
 --
 
-DROP TABLE IF EXISTS `pet`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pet` (
   `id` int(11) NOT NULL,
-  `specie` varchar(50) NOT NULL,
+  `specie` varchar(50) NOT NULL DEFAULT 'caine',
   `nume` varchar(100) NOT NULL,
   `varsta` int(11) NOT NULL,
   `sex` varchar(10) NOT NULL,
@@ -257,83 +211,62 @@ CREATE TABLE `pet` (
   `temperament` varchar(50) NOT NULL,
   `data_intrare` date NOT NULL,
   `descriere` text NOT NULL,
-  `status` varchar(20) NOT NULL,
-  `poza` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  `status` varchar(20) NOT NULL DEFAULT 'disponibil',
+  `poza` varchar(255) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `pet`
 --
 
-LOCK TABLES `pet` WRITE;
-/*!40000 ALTER TABLE `pet` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pet` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `pet` (`id`, `specie`, `nume`, `varsta`, `sex`, `talie`, `temperament`, `data_intrare`, `descriere`, `status`, `poza`) VALUES
+(1, 'caine', 'Rex', 3, 'M', 'medie', 'prietenos', '2023-05-10', 'Caine jucaus, se intelege bine cu copiii.', 'rezervat', 'p1.jpeg'),
+(3, 'caine', 'Luna', 2, 'F', 'mica', 'prietenos', '2023-07-22', 'Foarte atasata de oameni, potrivita pentru apartament.', 'disponibil', 'p2.jpeg'),
+(32, 'caine', 'Bruno', 5, 'M', 'mare', 'prietenos', '2024-01-15', 'Calm si ascultator, ideal pentru curte.', 'disponibil', 'p3.jpeg'),
+(33, 'caine', 'Nala', 1, 'F', 'medie', 'anxios', '2024-03-02', 'Timida la inceput, are nevoie de rabdare.', 'disponibil', 'p10.jpg'),
+(34, 'caine', 'Max', 4, 'M', 'mare', 'prietenos', '2024-04-18', 'Energic, are nevoie de plimbari lungi.', 'rezervat', 'p11.jpg'),
+(35, 'caine', 'Bella', 6, 'F', 'medie', 'prietenos', '2024-06-05', 'Blanda si linistita, potrivita pentru familii.', 'disponibil', 'p3.jpeg'),
+(36, 'caine', 'Rocky', 2, 'M', 'medie', 'prietenos', '2024-08-11', 'Sociabil, se intelege cu alti caini.', 'disponibil', 'p8.jpg'),
+(37, 'caine', 'Sasha', 3, 'F', 'mica', 'prietenos', '2024-09-27', 'Adora joaca si mangaierile.', 'disponibil', 'p9.jpg');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `sponsori`
 --
 
-DROP TABLE IF EXISTS `sponsori`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sponsori` (
   `id` int(11) NOT NULL,
   `nume` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `telefon` varchar(20) DEFAULT NULL,
-  `poza` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  `poza` varchar(255) NOT NULL DEFAULT '',
+  `cod_fiscal` varchar(50) DEFAULT NULL,
+  `CUI` varchar(50) DEFAULT NULL,
+  `adresa` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `sponsori`
---
-
-LOCK TABLES `sponsori` WRITE;
-/*!40000 ALTER TABLE `sponsori` DISABLE KEYS */;
-/*!40000 ALTER TABLE `sponsori` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `sponsorizari`
 --
 
-DROP TABLE IF EXISTS `sponsorizari`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sponsorizari` (
   `id` int(11) NOT NULL,
   `id_sponsor` int(11) NOT NULL,
   `id_factura` varchar(50) DEFAULT NULL,
-  `suma` decimal(10,0) NOT NULL,
-  `data_sponsorizare` date NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_sponsor` (`id_sponsor`),
-  CONSTRAINT `sponsorizari_ibfk_1` FOREIGN KEY (`id_sponsor`) REFERENCES `sponsori` (`id`)
+  `suma` decimal(10,2) NOT NULL,
+  `data_sponsorizare` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `sponsorizari`
+-- Table structure for table `users`
 --
 
-LOCK TABLES `sponsorizari` WRITE;
-/*!40000 ALTER TABLE `sponsorizari` DISABLE KEYS */;
-/*!40000 ALTER TABLE `sponsorizari` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `user`
---
-
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
   `parola` varchar(255) NOT NULL,
@@ -341,33 +274,231 @@ CREATE TABLE `user` (
   `prenume` varchar(100) NOT NULL,
   `data_inscriere` date DEFAULT NULL,
   `poza` varchar(255) DEFAULT NULL,
-  `categorie` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `categorie` (`categorie`),
-  CONSTRAINT `categorie` FOREIGN KEY (`categorie`) REFERENCES `categorie_utilizator` (`id`)
+  `categorie` int(11) NOT NULL DEFAULT 2
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `users` (`id`, `email`, `parola`, `nume`, `prenume`, `data_inscriere`, `poza`, `categorie`) VALUES
+(1, 'admin@adapost.ro', 'admin', 'Administrator', 'Adapost', '2024-01-01', NULL, 1),
+(2, 'user@test.ro', 'user', 'Ionescu', 'Maria', '2024-02-15', NULL, 2);
 
 --
--- Dumping routines for database 'animal_shelter'
+-- Indexes for dumped tables
 --
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Indexes for table `adoptii`
+--
+ALTER TABLE `adoptii`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_pet` (`id_pet`),
+  ADD KEY `id_user` (`id_user`);
+
+--
+-- Indexes for table `adoptii_distanta`
+--
+ALTER TABLE `adoptii_distanta`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_adoptie` (`id_adoptie`);
+
+--
+-- Indexes for table `categorie_utilizator`
+--
+ALTER TABLE `categorie_utilizator`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `donatii_online`
+--
+ALTER TABLE `donatii_online`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`);
+
+--
+-- Indexes for table `drepturi`
+--
+ALTER TABLE `drepturi`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_pagina` (`id_pagina`),
+  ADD KEY `categorie_utilizator` (`categorie_utilizator`);
+
+--
+-- Indexes for table `favorite`
+--
+ALTER TABLE `favorite`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_pet` (`id_pet`),
+  ADD KEY `id_user` (`id_user`);
+
+--
+-- Indexes for table `formular`
+--
+ALTER TABLE `formular`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pagini`
+--
+ALTER TABLE `pagini`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `categorie_utilizator` (`categorie_utilizator`);
+
+--
+-- Indexes for table `pet`
+--
+ALTER TABLE `pet`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sponsori`
+--
+ALTER TABLE `sponsori`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sponsorizari`
+--
+ALTER TABLE `sponsorizari`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_sponsor` (`id_sponsor`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `categorie` (`categorie`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `adoptii`
+--
+ALTER TABLE `adoptii`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `adoptii_distanta`
+--
+ALTER TABLE `adoptii_distanta`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `donatii_online`
+--
+ALTER TABLE `donatii_online`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `drepturi`
+--
+ALTER TABLE `drepturi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `favorite`
+--
+ALTER TABLE `favorite`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `formular`
+--
+ALTER TABLE `formular`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pagini`
+--
+ALTER TABLE `pagini`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT for table `pet`
+--
+ALTER TABLE `pet`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
+-- AUTO_INCREMENT for table `sponsori`
+--
+ALTER TABLE `sponsori`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sponsorizari`
+--
+ALTER TABLE `sponsorizari`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `adoptii`
+--
+ALTER TABLE `adoptii`
+  ADD CONSTRAINT `adoptii_ibfk_1` FOREIGN KEY (`id_pet`) REFERENCES `pet` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `adoptii_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `adoptii_distanta`
+--
+ALTER TABLE `adoptii_distanta`
+  ADD CONSTRAINT `adoptii_distanta_ibfk_1` FOREIGN KEY (`id_adoptie`) REFERENCES `adoptii` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `donatii_online`
+--
+ALTER TABLE `donatii_online`
+  ADD CONSTRAINT `donatii_online_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `drepturi`
+--
+ALTER TABLE `drepturi`
+  ADD CONSTRAINT `drepturi_ibfk_1` FOREIGN KEY (`id_pagina`) REFERENCES `pagini` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `drepturi_ibfk_2` FOREIGN KEY (`categorie_utilizator`) REFERENCES `categorie_utilizator` (`id`);
+
+--
+-- Constraints for table `favorite`
+--
+ALTER TABLE `favorite`
+  ADD CONSTRAINT `favorite_ibfk_1` FOREIGN KEY (`id_pet`) REFERENCES `pet` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `favorite_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `pagini`
+--
+ALTER TABLE `pagini`
+  ADD CONSTRAINT `pagini_ibfk_1` FOREIGN KEY (`categorie_utilizator`) REFERENCES `categorie_utilizator` (`id`);
+
+--
+-- Constraints for table `sponsorizari`
+--
+ALTER TABLE `sponsorizari`
+  ADD CONSTRAINT `sponsorizari_ibfk_1` FOREIGN KEY (`id_sponsor`) REFERENCES `sponsori` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`categorie`) REFERENCES `categorie_utilizator` (`id`);
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2025-06-04 16:44:25

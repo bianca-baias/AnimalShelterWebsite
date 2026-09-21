@@ -1,29 +1,48 @@
 <?php  require "header_logged.php"?>
 
+<?php 
+
+            if(isset($_GET['id'])){
+                $id=$_GET['id'];
+                $sql = "SELECT * FROM pet WHERE pet.id = '$id' LIMIT 1";
+                $result =  mysqli_query($conn,$sql);
+                $row= mysqli_fetch_assoc($result);
+            }
+            else{
+                $row['id']='';
+                $row['nume']='';
+                $row['varsta']='';
+                $row['sex']='';
+                $row['status']='';
+                $row['temperament']='';
+                $row['descriere']='';
+                $row['poza']='';
+                $row['data_intrare']='';
+                $row['talie']='';
+                }
+?>
+
+
         <main>
             <div class="container-fluid text-center pet-row">
                 <div class="row">
                     <div class="col-sm-12 col-md-6 col-lg-6">
                         <div id="carouselExample" class="carousel slide">
                             <div class="carousel-inner">
+                                <?php $numePoza = $row['id']."-".$row['poza']; $imgPath ="includes/admin/uploads/profile-"."$numePoza"; ?>                                ?>
+                                
                                 <div class="carousel-item active slider-pet">
-                                    <img src="Images/adoption/a1-1.jpg" class="img-fluid mx-auto h-100" alt="pet-image">
-                                </div>
-                                <div class="carousel-item slider-pet">
-                                    <img src="Images/adoption/a1-2.jpg" class="img-fluid mx-auto h-100" alt="pet-image">
-                                </div>
-                                <div class="carousel-item slider-pet">
-                                    <img src="Images/adoption/a1-3.jpg" class="img-fluid mx-auto h-100" alt="pet-image">
+                                    <img src="<?php echo $imgPath ?>" class="img-fluid mx-auto h-100" alt="pet-image">
                                 </div>
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                            <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
                             <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Next</span>
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                     
@@ -31,12 +50,13 @@
                         <div class="vstack">
                             <div class="p-2 pet-description">  
                                 <h4>Descriere</h4> <br>
-                                <b>Nume:</b> Toto <br>
-                                <b>Sex:</b> mascul <br> 
-                                <b>Varsta:</b> 3 ani  <br>
-                                <b>Timp in adapost:</b> 19 luni  <br> 
-                                <b>Temperament:</b> prietenos <br> 
-                                <b>Povestea lui:</b> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                                <b>Status:</b>  <?php echo $row['status']?> <br>
+                                <b>Nume:</b>  <?php echo $row['nume']?> <br>
+                                <b>Sex:</b>  <?php echo $row['sex']?> <br> 
+                                <b>Varsta:</b>  <?php echo $row['varsta']?> ani  <br>
+                                <b>Intrare in adapost:</b>  <?php echo $row['data_intrare']?>  <br> 
+                                <b>Temperament:</b>  <?php echo $row['temperament']?> <br> 
+                                <b>Povestea lui:</b> <?php echo $row['descriere']?> <br>
                             </div>
                             <div class="row g-2">
                                 <div class="col-sm-12 col-md-3 col-lg-3">
